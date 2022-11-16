@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class UserController {
     @Autowired
     private final UserService userService;
@@ -29,7 +30,7 @@ public class UserController {
         return "done";
     }
 
-    @GetMapping("/")
+    @GetMapping("/all")
     public  List<User> list(){
         List<User> listFinal = new ArrayList<User>();
         for(int i = 0; i < userService.listAll().size(); i++){
@@ -38,6 +39,11 @@ public class UserController {
             }
         }
         return listFinal;
+    }
+
+    @GetMapping("/mostrarPN/{user_name}")
+    public User findByUserName(@PathVariable("user_name") String user_name){
+        return userService.get(user_name);
     }
 
     @DeleteMapping("/users/{userid}")

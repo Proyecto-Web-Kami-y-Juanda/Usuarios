@@ -24,8 +24,8 @@ public class UserService {
         repo.save(user);
     }
 
-    public User get(String username){
-        return repo.findById(username).get();
+    public User get(String user_name){
+        return repo.findById(user_name).get();
     }
 
     public void delete(String username) {
@@ -41,6 +41,11 @@ public class UserService {
         User nuevo = repo.findById(username).orElseThrow(() -> new Exception("No existe un usuario con ese id"));
         nuevo.setUserName(user.getUserName());
         nuevo.setPassword(user.getPassword());
+        nuevo.setNames(user.getNames());
+        nuevo.setLastNames(user.getLastNames());
+        nuevo.setDate(user.getDate());
+        nuevo.setPosition(user.getPosition());
+        nuevo.setInactivate(user.isInactivate());
 
         repo.save(nuevo);
 
